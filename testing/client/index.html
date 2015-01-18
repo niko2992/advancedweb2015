@@ -1,0 +1,61 @@
+<head>
+    <meta charset="UTF-8">
+    <title>WebRTC chat</title>
+    <!-- Load socket.io library -->
+    <script type="text/javascript" src="/socket.io/socket.io.js">
+</script>
+    <!-- Load streaming API -->
+    <script type="text/javascript" src="/ressources.js">
+</script>
+    <!-- Formatting -->
+    <style type="text/css">
+        body {
+            background-color: rgb(50,50,80);
+            color: white;
+            text-align: center;
+        }
+
+        #chatBox {
+            background-color: white;
+            opacity: 0.8;
+            width: 500px;
+            height: 300px;
+            margin: auto;
+            border: 3px rgb(40,40,40) solid;
+            overflow: auto;
+        }
+
+        .line {
+            border-bottom: 1px rgb(80,80,80) solid;
+            padding: 4px;
+            text-align: left;
+            color: rgb(40,40,40);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HTML elements -->
+    <!-- Streaming-->
+    <video id="sourceVid" width="320" height="240" style="opacity: 0" muted="muted"></video>
+    <br />
+    <button id="startButton" type="button" onclick="startVideo();" disabled="disabled">Join stream</button>
+    <button id="stopButton" type="button" onclick="stopVideo();" disabled="disabled">Leave stream</button>
+
+    <!-- Chat -->
+    <div id="chatBox"></div>
+    <form onsubmit="return sendChat();">
+        <b>Message : </b>
+        <input type="text" name="message" id="messInput" style="width: 250px;" autocomplete="off" autofocus="autofocus" />
+        <input type="submit" value="Send" />
+    </form>
+
+    <!-- Start -->
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
+            unInitialize();
+        }
+
+        initialize();
+  </script>
+</body>
